@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold HyperFlow Scalper - Live Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div>
+                <div class="company-logo">ALGOMAXX</div>
+                <div class="company-tagline">Real-Time Trading Dashboard</div>
+            </div>
+            <div class="status-indicator">
+                <div class="status-dot" id="statusDot"></div>
+                <span id="connectionStatus">Connecting...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header-section">
+            <h1 class="dashboard-title">🚀 GOLD HYPERFLOW SCALPER</h1>
+            <p class="dashboard-subtitle">Live Performance Monitoring</p>
+            <div class="last-update">Last Update: <span id="lastUpdate">--</span></div>
+        </div>
+
+        <!-- Live Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-label">Balance</div>
+                <div class="stat-value" id="balance">$0.00</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-label">Equity</div>
+                <div class="stat-value" id="equity">$0.00</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-label">Floating P/L</div>
+                <div class="stat-value" id="floatingPL">$0.00</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📅</div>
+                <div class="stat-label">Daily Trades</div>
+                <div class="stat-value" id="dailyTrades">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-label">Wins</div>
+                <div class="stat-value positive" id="wins">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">❌</div>
+                <div class="stat-label">Losses</div>
+                <div class="stat-value negative" id="losses">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-label">Win Rate</div>
+                <div class="stat-value" id="winRate">0%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💵</div>
+                <div class="stat-label">Daily P/L</div>
+                <div class="stat-value" id="dailyPL">$0.00</div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts-section">
+            <div class="chart-container">
+                <h3 class="chart-title">📊 Recent Trades</h3>
+                <canvas id="tradesChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3 class="chart-title">📈 Win/Loss Distribution</h3>
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Trade History Table -->
+        <div class="table-section">
+            <h3 class="section-title">📋 Recent Trade History</h3>
+            <div class="table-wrapper">
+                <table id="tradesTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Type</th>
+                            <th>Open Time</th>
+                            <th>Close Time</th>
+                            <th>Profit</th>
+                            <th>Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tradesTableBody">
+                        <tr>
+                            <td colspan="6" class="no-data">Loading trade data...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-logo">ALGOMAXX</div>
+        <div class="footer-text">Gold HyperFlow Scalper - Professional Trading System</div>
+        <div class="footer-text">Auto-updates every 5 seconds</div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
