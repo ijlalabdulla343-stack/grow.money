@@ -1,125 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gold HyperFlow Scalper - Live Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GoldHyperFlow — EA Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="top-bar-content">
-            <div>
-                <div class="company-logo">ALGOMAXX</div>
-                <div class="company-tagline">Real-Time Trading Dashboard</div>
-            </div>
-            <div class="status-indicator">
-                <div class="status-dot" id="statusDot"></div>
-                <span id="connectionStatus">Connecting...</span>
-            </div>
-        </div>
-    </div>
+  <header class="header">
+    <h1>GoldHyperFlow — MT5 Web Dashboard</h1>
+    <div id="status" class="status">Connecting...</div>
+  </header>
 
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Header -->
-        <div class="header-section">
-            <h1 class="dashboard-title">🚀 GOLD HYPERFLOW SCALPER</h1>
-            <p class="dashboard-subtitle">Live Performance Monitoring</p>
-            <div class="last-update">Last Update: <span id="lastUpdate">--</span></div>
-        </div>
+  <main class="container">
 
-        <!-- Live Stats Grid -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon">💰</div>
-                <div class="stat-label">Balance</div>
-                <div class="stat-value" id="balance">$0.00</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">📊</div>
-                <div class="stat-label">Equity</div>
-                <div class="stat-value" id="equity">$0.00</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">📈</div>
-                <div class="stat-label">Floating P/L</div>
-                <div class="stat-value" id="floatingPL">$0.00</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">📅</div>
-                <div class="stat-label">Daily Trades</div>
-                <div class="stat-value" id="dailyTrades">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">✅</div>
-                <div class="stat-label">Wins</div>
-                <div class="stat-value positive" id="wins">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">❌</div>
-                <div class="stat-label">Losses</div>
-                <div class="stat-value negative" id="losses">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">🎯</div>
-                <div class="stat-label">Win Rate</div>
-                <div class="stat-value" id="winRate">0%</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">💵</div>
-                <div class="stat-label">Daily P/L</div>
-                <div class="stat-value" id="dailyPL">$0.00</div>
-            </div>
-        </div>
+    <!-- Metrics Section -->
+    <section class="card">
+      <h2>EA Performance Overview</h2>
+      <div class="metrics">
+        <div class="metric"><div class="label">Balance</div><div id="balance" class="value">—</div></div>
+        <div class="metric"><div class="label">Equity</div><div id="equity" class="value">—</div></div>
+        <div class="metric"><div class="label">Floating P/L</div><div id="floatingPL" class="value">—</div></div>
+        <div class="metric"><div class="label">Daily Trades</div><div id="dailyTrades" class="value">—</div></div>
+        <div class="metric"><div class="label">Win Rate</div><div id="winRate" class="value">—</div></div>
+        <div class="metric"><div class="label">Daily P/L</div><div id="dailyPL" class="value">—</div></div>
+        <div class="metric"><div class="label">Status</div><div id="statusEA" class="value">—</div></div>
+        <div class="metric"><div class="label">Last Trade</div><div id="lastTrade" class="value">—</div></div>
+      </div>
+    </section>
 
-        <!-- Charts Section -->
-        <div class="charts-section">
-            <div class="chart-container">
-                <h3 class="chart-title">📊 Recent Trades</h3>
-                <canvas id="tradesChart"></canvas>
-            </div>
-            <div class="chart-container">
-                <h3 class="chart-title">📈 Win/Loss Distribution</h3>
-                <canvas id="pieChart"></canvas>
-            </div>
-        </div>
+    <!-- Chart Section -->
+    <section class="card">
+      <h2>Equity History</h2>
+      <canvas id="priceChart" height="120"></canvas>
+    </section>
 
-        <!-- Trade History Table -->
-        <div class="table-section">
-            <h3 class="section-title">📋 Recent Trade History</h3>
-            <div class="table-wrapper">
-                <table id="tradesTable">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Type</th>
-                            <th>Open Time</th>
-                            <th>Close Time</th>
-                            <th>Profit</th>
-                            <th>Duration</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tradesTableBody">
-                        <tr>
-                            <td colspan="6" class="no-data">Loading trade data...</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+    <!-- Recent Trades Section -->
+    <section class="card">
+      <h2>Recent Trades (Sheet 2)</h2>
+      <table id="tradesTable" class="trades">
+        <thead>
+          <tr>
+            <th>Trade ID</th>
+            <th>Type</th>
+            <th>Open Time</th>
+            <th>Close Time</th>
+            <th>Profit</th>
+            <th>Lots</th>
+            <th>Duration (s)</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
 
-    <!-- Footer -->
-    <div class="footer">
-        <div class="footer-logo">ALGOMAXX</div>
-        <div class="footer-text">Gold HyperFlow Scalper - Professional Trading System</div>
-        <div class="footer-text">Auto-updates every 5 seconds</div>
-    </div>
+    <!-- Activity Log -->
+    <section class="card">
+      <h2>Activity Log</h2>
+      <ul id="activity" class="activity"></ul>
+    </section>
 
-    <script src="app.js"></script>
+  </main>
+
+  <footer class="footer">
+    <p>Powered by GoldHyperFlow EA | Updates every <code>5s</code></p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
